@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRCT-PAMI | Reporte de Caída</title>
+    <style>
+        /* Estilos unificados para asegurar el diseño limpio de la demo */
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
+        .form-container { max-width: 600px; background: white; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid #0056b3; }
+        h2 { color: #0056b3; margin-top: 0; }
+        .section-title { font-weight: bold; background: #e9ecef; padding: 8px; margin: 20px 0 10px 0; border-left: 4px solid #0056b3; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        input[type="radio"], input[type="checkbox"] { margin-right: 10px; }
+        .radio-group, .checkbox-group { margin-bottom: 12px; display: flex; align-items: center; }
+        .radio-group label, .checkbox-group label { margin-bottom: 0; font-weight: normal; cursor: pointer; }
+        button { background-color: #0056b3; color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; margin-top: 15px; }
+        button:hover { background-color: #004085; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>📄 Formulario de Reporte de Caída y Trauma (FRCT-PAMI)</h2>
+    <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Fase Piloto - Monitoreo de Fracturas de Cadera en Mayores de 65 años.</p>
+    
+    <form id="caidasForm">
+        <div class="section-title">1. Datos del Afiliado y Evento</div>
+        <div class="form-group">
+            <label for="afiliado">Nro. de Afiliado (PAMI):</label>
+            <input type="text" id="afiliado" required placeholder="Ej: 150XXXXXXXXX">
+        </div>
+        <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" min="65" required placeholder="Solo ≥ 65 años">
+        </div>
+        
+        <div class="section-title">2. Clasificación del Mecanismo de la Caída</div>
+        <div class="form-group">
+            <div class="radio-group"><input type="radio" id="mec1" name="mecanismo" value="propia_altura" required><label for="mec1">Caída desde la propia altura (mismo nivel: tropezón, resbalón)</label></div>
+            <div class="radio-group"><input type="radio" id="mec2" name="mecanismo" value="mayor_altura"><label for="mec2">Caída desde altura mayor (escaleras, sillas)</label></div>
+            <div class="radio-group"><input type="radio" id="mec3" name="mecanismo" value="sincope"><label for="mec3">Síncope / Desmayo previo</label></div>
+            <div class="radio-group"><input type="radio" id="mec4" name="mecanismo" value="via_publica"><label for="mec4">Accidente en la vía pública / Externo</label></div>
+        </div>
+
+        <div class="section-title">3. Diagnóstico Prestacional (CIE-10)</div>
+        <div class="form-group">
+            <select id="cie10" required>
+                <option value="">Seleccione el diagnóstico...</option>
+                <option value="S72.0">S72.0 - Fractura de cuello de fémur</option>
+                <option value="S72.1">S72.1 - Fractura pertrocantérea</option>
+                <option value="S72.2">S72.2 - Fractura subtrocantérea</option>
+                <option value="otro">Otro diagnóstico asociado a cadera</option>
+            </select>
+        </div>
+
+        <div class="section-title">4. Factores de Riesgo Modificables</div>
+        <div class="form-group">
+            <div class="checkbox-group"><input type="checkbox" id="fr1" value="polifarmacia"><label for="fr1">Polifarmacia (>5 medicamentos / psicofármacos)</label></div>
+            <div class="checkbox-group"><input type="checkbox" id="fr2" value="cognitivo"><label for="fr2">Deterioro Cognitivo / Demencia</label></div>
+            <div class="checkbox-group"><input type="checkbox" id="fr3" value="arquitectura"><label for="fr3">Barrera Arquitectónica en el hogar</label></div>
+            <div class="checkbox-group"><input type="checkbox" id="fr4" value="previa"><label for="fr4">Historial de fractura previa (< 1 año)</label></div>
+        </div>
+
+        <div class="section-title">5. Eficiencia Operativa (Fast-Track)</div>
+        <div class="form-group">
+            <label for="tiempo">Tiempo desde la caída hasta el quirófano:</label>
+            <select id="tiempo" required>
+                <option value="">Seleccione el rango de tiempo...</option>
+                <option value="menos_24">Menos de 24 horas</option>
+                <option value="24_48">Entre 24 y 48 horas (Meta)</option>
+                <option value="mas_48">Más de 48 horas</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="demora">Si demoró más de 48 horas, detalle el motivo:</label>
+            <textarea id="demora" rows="2" placeholder="Falta de prótesis, estabilización clínica, etc."></textarea>
+        </div>
+
+        <button type="button" onclick="enviarDatos()">Enviar Reporte Digital</button>
+    </form>
+</div>
+
+<script>
+    function enviarDatos() {
+        // Simulación Agile de envío de datos interactivo
+        alert("¡Reporte enviado con éxito! Datos listos para la base estadística del Sprint.");
+        document.getElementById("caidasForm").reset();
+    }
+</script>
+</body>
+</html>
