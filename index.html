@@ -85,10 +85,48 @@
 
 <script>
     function enviarDatos() {
-        // Simulación Agile de envío de datos interactivo
-        alert("¡Reporte enviado con éxito! Datos listos para la base estadística del Sprint.");
-        document.getElementById("caidasForm").reset();
+    // REEMPLAZA LAS XX ENTRE COMILLAS CON LA URL QUE COPIASTE DE GOOGLE APPS SCRIPT
+    const urlGoogleScript = "https://script.google.com/macros/s/AKfycbzsS9iNEWMcxWFMBzOfTeo4k959TyB-bTqQFCKBZTW7z_5a3GpaUlGG-lZMFnyVgsJe/exec
+";
+
+    // Recolectar factores de riesgo seleccionados
+    let factores = [];
+    if(document.getElementById("fr1").checked) factores.push("Polifarmacia");
+    if(document.getElementById("fr2").checked) factores.push("Deterioro Cognitivo");
+    if(document.getElementById("fr3").checked) factores.push("Arquitectura");
+    if(document.getElementById("fr4").checked) factores.push("Previa");
+
+    const datosFormulario = {
+        afiliado: document.getElementById("afiliado").value,
+        edad: document.getElementById("edad").value,
+        mecanismo: document.querySelector('input[name="mecanismo"]:checked')?.value || 'No especificado',
+        cie10: document.getElementById("cie10").value,
+        factores: factores.join(", "),
+        tiempo: document.getElementById("tiempo").value,
+        demora: document.getElementById("demora").value
+    };
+
+    // Validación básica ágil antes de enviar
+    if(!datosFormulario.afiliado || !datosFormulario.edad || datosFormulario.cie10 === "") {
+        alert("Por favor, completa los campos obligatorios (*)");
+        return;
     }
+
+    // Enviar datos mediante Fetch API a Google Sheets
+    fetch(urlGoogleScript, {
+        method: 'POST',
+        mode: 'no-cors', // Evita bloqueos de seguridad del navegador para la demo
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datosFormulario)
+    })
+    .then(() => {
+        alert("¡Reporte enviado con éxito a la base de datos de Google Sheets!");
+        document.getElementById("caidasForm").reset();
+    })
+    .catch(error => {
+        alert("Error al enviar los datos: " + error);
+    });
+}
 </script>
 </body>
 </html>
